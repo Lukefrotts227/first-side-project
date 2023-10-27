@@ -29,6 +29,6 @@ body {
 
 .my-background{
   background-image:url('back.svg'); 
-  background-repeat: no-repeat;
+  background-repeat: repeat;
   background-size: cover;
 }
