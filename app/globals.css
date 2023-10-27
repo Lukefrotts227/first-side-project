@@ -25,3 +25,10 @@ body {
     )
     rgb(var(--background-start-rgb));
 }
+
+
+.my-background{
+  background-image:url('back.svg'); 
+  background-repeat: no-repeat;
+  background-size: cover;
+}
