@@ -1,20 +1,21 @@
 import { main01 } from "@/helpers/openai/openmain";
-import { NextApiRequest, NextApiResponse } from 'next'; 
 
 
 
-const handler = async (req: NextApiRequest, res: NextApiResponse) =>{
-    const { content } = req.body; 
+const handler =  async (req: any, res: any) =>{
+    const { content } = (req.body); 
+    console.log(req.body); 
     console.log(content); 
+    console.log('Request:', req);
+    console.log('Response:', res);
+
 
 
     if (!content || typeof content !== 'string') {
         console.log("here"); 
-        res.status(400).json({ error: 'Invalid input' });
+        res.status(400); 
         return;
     }
-    console.log('Request:', req);
-    console.log('Response:', res);
 
     try{
        const data = await main01(content); 

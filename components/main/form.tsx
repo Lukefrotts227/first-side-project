@@ -8,6 +8,7 @@ const Form = () =>{
     const generateIdea = async (e: React.MouseEvent<HTMLButtonElement>) => {
         setLoading(true);
         e.preventDefault();
+        alert(content)
         try {
             const response = await fetch('/api/main', {
                 method: 'POST',
