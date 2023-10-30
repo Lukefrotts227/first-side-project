@@ -3,6 +3,7 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 # About this Project 
 - This project will help users generate side projects
 - It will go through the process and generate ideas with user input for assistance
+- Version one will try using open ai and gpt-3.5-turbo to generate ideas
 
 ## Getting Started
 
