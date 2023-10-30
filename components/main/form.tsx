@@ -1,21 +1,26 @@
 import React, { useState } from 'react';
 import { Router } from 'next/router'; 
+
+
 const Form = () =>{
     const [content, setContent] = useState(''); 
     const [idea, setIdea] = useState(null);  
-    const [loading, setLoading] = useState(false); 
+
+
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), 10000);
+
 
     const generateIdea = async (e: React.MouseEvent<HTMLButtonElement>) => {
-        setLoading(true);
         e.preventDefault();
-        alert(content)
         try {
             const response = await fetch('/api/main', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({ content }),
+                body: JSON.stringify(content),
+                signal: controller.signal
             });
             
             if (!response.ok) {
@@ -28,10 +33,9 @@ const Form = () =>{
             setIdea(data.choices[0].message.content);
         } catch (error) {
             console.error(error);
-        } finally {
-            setLoading(false);
-        }
+        } 
     }
+    
         return(
         <div>
             <form className="flex flex-col gap-2">
@@ -39,7 +43,7 @@ const Form = () =>{
                 <input value={content}
                 onChange={(e) => setContent(e.target.value)}
                 placeholder="Enter it here" />
-                <button onClick={generateIdea} disabled={loading}>Submit</button>
+                <button onClick={generateIdea}>Submit</button>
             </form>     
             {idea && <div>Generated idea: {idea} </div>}       
         </div>

@@ -1,31 +1,25 @@
 import { main01 } from "@/helpers/openai/openmain";
+import { NextRequest, NextResponse } from 'next/server'; 
 
+export async function POST(request: Request){
+    const body = await request.json(); 
 
+    const content = body; 
+    console.log(body); 
+    console.log(content);
 
-const handler =  async (req: any, res: any) =>{
-    const { content } = (req.body); 
-    console.log(req.body); 
-    console.log(content); 
-    console.log('Request:', req);
-    console.log('Response:', res);
-
-
-
-    if (!content || typeof content !== 'string') {
-        console.log("here"); 
-        res.status(400); 
-        return;
+    if(!content || typeof content !== 'string'){
+        console.log("content not proper!!!"); 
+        return NextResponse.json({ error: 'Internal Server Error'}, { status: 500}); 
+         
     }
 
-    try{
-       const data = await main01(content); 
-       res.status(200).json(data); 
-    } catch(error){
+    try {
+        const data = await main01(content); 
+        return NextResponse.json(data); 
+    }catch(error){
         console.error(error); 
-        //res.status(500).json({ error: 'Internal Server Error' });
+        return NextResponse.json({error: "Internal Server Error"}, {status: 500})   
     }
-}; 
-
-
-
-export const POST = handler;
+    
+}

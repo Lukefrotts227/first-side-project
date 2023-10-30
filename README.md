@@ -5,6 +5,10 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 - It will go through the process and generate ideas with user input for assistance
 - Version one will try using open ai and gpt-3.5-turbo to generate ideas
 
+# Challenges 
+- This is my first typescript project 
+- Working with Next.js 13 and the app router means access to documentation for problems is limited
+
 ## Getting Started
 
 First, run the development server:
