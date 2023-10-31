@@ -1,16 +1,20 @@
 import React, { useState } from 'react';
-import { Router } from 'next/router'; 
+import { useRouter } from 'next/router'; 
 
 
 const Form = () =>{
     const [content, setContent] = useState(''); 
-    const [idea, setIdea] = useState(null);  
+    const [ideas, setIdeas] = useState(null);  
     const [text, setText] = useState(''); 
     const [isLoading, setIsLoading] = useState(false); 
 
 
     const controller = new AbortController();
     const timeoutId = setTimeout(() => controller.abort(), 10000);
+
+    const deStringify = (object : any) =>{
+        return; 
+    }
 
     const handleKeyDown = (e: any) =>{
         if(e.key === "Enter" && !e.shiftKey){
@@ -40,7 +44,7 @@ const Form = () =>{
             const data = await response.json();
             console.log(data);
     
-            setIdea(data.choices[0].message.content);
+            setIdeas(data.choices[0].message.content);
         } catch (error) {
             console.error(error);
         } finally{
@@ -64,7 +68,7 @@ const Form = () =>{
                 {isLoading ? 'Loading...' : 'Submit'}
                 </button>
             </form>     
-            {idea && <div>Generated idea: {idea} </div>}       
+            {ideas && <div className="flex items-center justify-center"> <div className="bg-gray-500 rounded-2xl shadow-md border-white border-2 w-3/5">Generated idea: {ideas} </div> </div>}       
         </div>
     ); 
 }
