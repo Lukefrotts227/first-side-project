@@ -1,5 +1,7 @@
-import { main01 } from "@/helpers/openai/openmain";
+import { main01, upgradeMain } from "@/helpers/openai/openmain";
 import { NextRequest, NextResponse } from 'next/server'; 
+
+
 
 export async function POST(request: Request){
     const body = await request.json(); 
@@ -16,6 +18,8 @@ export async function POST(request: Request){
 
     try {
         const data = await main01(content); 
+        const alt = await upgradeMain(content); 
+        console.log(alt); 
         return NextResponse.json(data); 
     }catch(error){
         console.error(error); 

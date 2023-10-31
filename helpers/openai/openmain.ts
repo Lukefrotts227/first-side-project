@@ -1,4 +1,6 @@
 import openai from "./config/openaiConfig";
+import * as dotenv from 'dotenv'; 
+
 const para = `It must be a single sentence and short.`
 
 export const main01 = async (content: string) =>{
@@ -11,6 +13,16 @@ export const main01 = async (content: string) =>{
     });
     return completion; 
 }; 
+
+export const upgradeMain = async(content: string) =>{
+    const completion = await openai.chat.completions.create({
+        messages:[{role:"system", content: "This chatbot returns json formatted app ideas"}, {role:"user", content:`${content}`}],
+        model:'ftjob-axCsYuFL4lgLB9y5nQ7Od7Ji',
+        max_tokens:600, 
+        temperature: .1, 
+
+    })
+}
 
 console.log(main01("an entertainment application")); 
 
