@@ -4,16 +4,23 @@ import { useRouter } from 'next/router';
 
 const Form = () =>{
     const [content, setContent] = useState(''); 
-    const [ideas, setIdeas] = useState(null);  
+    const [ideas, setIdeas] = useState([]);  
     const [text, setText] = useState(''); 
     const [isLoading, setIsLoading] = useState(false); 
+
+    
 
 
     const controller = new AbortController();
     const timeoutId = setTimeout(() => controller.abort(), 10000);
 
-    const deStringify = (object : any) =>{
-        return; 
+    const onItemClick = (idea :any) =>{
+        const storedIdeas = JSON.parse(sessionStorage.getItem('savedIdeas') || '[]');
+        // Add the new idea to the array
+        storedIdeas.push(idea);
+        // Store the updated array back in session storage
+        sessionStorage.setItem('savedIdeas', JSON.stringify(storedIdeas));
+       
     }
 
     const handleKeyDown = (e: any) =>{
@@ -44,7 +51,7 @@ const Form = () =>{
             const data = await response.json();
             console.log(data);
     
-            setIdeas(data.choices[0].message.content);
+            setIdeas(JSON.parse(data.choices[0].message.content));
         } catch (error) {
             console.error(error);
         } finally{
@@ -68,7 +75,19 @@ const Form = () =>{
                 {isLoading ? 'Loading...' : 'Submit'}
                 </button>
             </form>     
-            {ideas && <div className="flex items-center justify-center"> <div className="bg-gray-500 rounded-2xl shadow-md border-white border-2 w-3/5">Generated idea: {ideas} </div> </div>}       
+            {ideas && 
+            <ul>{ideas.map((idea:any, index:any) => (
+                <li key={index} onClick={() => onItemClick(idea)}>
+                    <div className="flex items-center justify-center"> 
+                        <div className="bg-gray-500 rounded-2xl shadow-md border-white border-2 w-3/5 text-center">
+                            <h1>{idea.title}</h1>
+                            <p>{idea.description}</p>
+                        </div> 
+                    </div>
+                </li>
+                ))}
+            </ul>  
+            }       
         </div>
     ); 
 }

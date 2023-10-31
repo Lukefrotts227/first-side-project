@@ -17,11 +17,12 @@ export const main01 = async (content: string) =>{
 export const upgradeMain = async(content: string) =>{
     const completion = await openai.chat.completions.create({
         messages:[{role:"system", content: "This chatbot returns json formatted app ideas"}, {role:"user", content:`${content}`}],
-        model:'ftjob-axCsYuFL4lgLB9y5nQ7Od7Ji',
+        model:'ft:gpt-3.5-turbo-0613:personal::8Fq5PV1M',
         max_tokens:600, 
         temperature: .1, 
 
     })
+    return completion
 }
 
 console.log(main01("an entertainment application")); 

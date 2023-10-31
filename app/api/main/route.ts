@@ -17,9 +17,8 @@ export async function POST(request: Request){
     }
 
     try {
-        const data = await main01(content); 
-        const alt = await upgradeMain(content); 
-        console.log(alt); 
+        //const data = await main01(content); 
+        const data = await upgradeMain(content); 
         return NextResponse.json(data); 
     }catch(error){
         console.error(error); 
