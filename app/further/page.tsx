@@ -1,8 +1,14 @@
+"use client"; 
+import { Display } from "@/components/further/display";
+
 export default function Further(){
 
     return(
-        <div>
-        stuff
-        </div>
+        <main>
+            <header>
+                <Display />
+            </header>
+        
+        </main>
         )
 }

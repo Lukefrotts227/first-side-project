@@ -25,6 +25,15 @@ export const upgradeMain = async(content: string) =>{
     return completion
 }
 
+export const howTo = async(content: string) => {
+    const completition = await openai.chat.completions.create({
+        messages:[{role:"system", content:"This chatbot provides details on the technolgies and skills needed for an app idea in json fo"}, {role:"user", content:`${content}`}], 
+        model:'gpt-3.5-turbo',
+        max_tokens:800, 
+        temperature: .3,
+    })
+}
+
 console.log(main01("an entertainment application")); 
 
 if(require.main === module){

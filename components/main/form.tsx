@@ -1,13 +1,12 @@
 import React, { useState } from 'react';
-import { useRouter } from 'next/router'; 
-
+import { useRouter } from 'next/navigation'
 
 const Form = () =>{
     const [content, setContent] = useState(''); 
     const [ideas, setIdeas] = useState([]);  
     const [text, setText] = useState(''); 
     const [isLoading, setIsLoading] = useState(false); 
-
+    const router = useRouter(); 
     
 
 
@@ -15,11 +14,10 @@ const Form = () =>{
     const timeoutId = setTimeout(() => controller.abort(), 10000);
 
     const onItemClick = (idea :any) =>{
-        const storedIdeas = JSON.parse(sessionStorage.getItem('savedIdeas') || '[]');
-        // Add the new idea to the array
-        storedIdeas.push(idea);
-        // Store the updated array back in session storage
-        sessionStorage.setItem('savedIdeas', JSON.stringify(storedIdeas));
+        sessionStorage.clear(); 
+       
+        sessionStorage.setItem('savedIdeas',JSON.stringify(idea));
+        router.push('/further'); 
        
     }
 
@@ -77,9 +75,9 @@ const Form = () =>{
             </form>     
             {ideas && 
             <ul>{ideas.map((idea:any, index:any) => (
-                <li key={index} onClick={() => onItemClick(idea)}>
+                <li className="pb-5 cursor-pointer" key={index} onClick={() => onItemClick(idea)}>
                     <div className="flex items-center justify-center"> 
-                        <div className="bg-gray-500 rounded-2xl shadow-md border-white border-2 w-3/5 text-center">
+                        <div className="bg-gray-500 rounded-2xl shadow-md border-white border-2 w-3/5 text-center p-6">
                             <h1>{idea.title}</h1>
                             <p>{idea.description}</p>
                         </div> 
