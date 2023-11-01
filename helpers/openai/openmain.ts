@@ -1,5 +1,4 @@
 import openai from "./config/openaiConfig";
-import * as dotenv from 'dotenv'; 
 
 const para = `It must be a single sentence and short.`
 
@@ -27,14 +26,14 @@ export const upgradeMain = async(content: string) =>{
 
 export const howTo = async(content: string) => {
     const completition = await openai.chat.completions.create({
-        messages:[{role:"system", content:"This chatbot provides details on the technolgies and skills needed for an app idea in json fo"}, {role:"user", content:`${content}`}], 
-        model:'gpt-3.5-turbo',
+        messages:[{role:"system", content:"This chatbot takes app ideas and outputs the process of building it in proper json format"}, {role:"user", content:`${content}`}], 
+        model:'ft:gpt-3.5-turbo-0613:personal::8Fx3JJyg',
         max_tokens:800, 
         temperature: .3,
     })
 }
 
-console.log(main01("an entertainment application")); 
+
 
 if(require.main === module){
     console.log(main01("An entertainment App"))
