@@ -1,19 +1,25 @@
 "use client"; 
 
 import Form from '@/components/main/form';
+import { Custom } from '@/components/main/custom';
 
 export default function Main(){
 
 
     return(
-        <main className="grid">
+        <main className="grid place-items-center">
             <header className="h-40"></header>
 
-            <section className ="grid place-items-center">
+            <section className ="">
                 <Form />
             </section>
+            
+            <section>
+            </section>
 
-            <section></section>
+            <section className= "">
+                <Custom />
+            </section>
 
             <footer></footer>
 
