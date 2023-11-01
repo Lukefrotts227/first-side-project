@@ -21,7 +21,7 @@ export const upgradeMain = async(content: string) =>{
         temperature: .1, 
 
     })
-    return completion
+    return completion; 
 }
 
 export const howTo = async(content: string) => {
@@ -31,6 +31,7 @@ export const howTo = async(content: string) => {
         max_tokens:800, 
         temperature: .3,
     })
+    return completition; 
 }
 
 

@@ -77,7 +77,7 @@ const Form = () =>{
             <ul>{ideas.map((idea:any, index:any) => (
                 <li className="pb-5 cursor-pointer" key={index} onClick={() => onItemClick(idea)}>
                     <div className="flex items-center justify-center"> 
-                        <div className="bg-gray-500 rounded-2xl shadow-md border-white border-2 w-3/5 text-center p-6">
+                        <div className="bg-gray-500 hover:bg-gray-800 hover:text-white rounded-2xl shadow-md border-white border-2 w-3/5 text-center p-6">
                             <h1>{idea.title}</h1>
                             <p>{idea.description}</p>
                         </div> 

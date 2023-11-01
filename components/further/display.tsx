@@ -10,6 +10,7 @@ export const Display = () => {
       try {
         const parsedData:any = JSON.parse(jsonString);
         setData(parsedData);
+        
       } catch (error) {
         console.error("Error parsing JSON string:", error);
         // Handle error
@@ -20,8 +21,9 @@ export const Display = () => {
   return(
     <div>
         {data ? (
-    <div className = "text-center">
-        <h1 className="text-4xl">{data.title}</h1>
+    <div className = "text-center pt-8">
+        <h1 className="text-2xl pb-4">You Chose...</h1>
+        <h2 className="text-4xl pb-4">{data.title}</h2>
          <p className="text-xl">{data.description}</p>
     </div>
   ) : (
