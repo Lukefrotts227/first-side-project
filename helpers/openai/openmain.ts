@@ -2,6 +2,17 @@ import openai from "./config/openaiConfig";
 
 const para = `It must be a single sentence and short.`
 
+
+export const questioner = async(content: string) =>{
+    const completion = await openai.chat.completions.create({
+        messages: [{role: "system", content: "you are a chatbot that provides information on project idea creation"}, {role:"user", "content":`${content}`}],
+        model:'gpt-3.5-turbo',
+        max_tokens:650, 
+        temperature: 1.2,
+    })
+    return completion; 
+}
+
 export const main01 = async (content: string) =>{
     const completion = await openai.chat.completions.create({
         messages: [{ role: "system", content: `generate a project idea base on this user prompt.${para} \n${content}` }],
