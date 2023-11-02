@@ -1,5 +1,33 @@
 import { upgradeMain } from "@/helpers/openai/openmain";
-import { NextRequest, NextResponse } from 'next/server'; 
+import { NextResponse } from 'next/server'; 
+import Ajv from "ajv";
+
+const ajv = new Ajv(); 
+
+const ideaSchema = {
+    type: "object",
+    properties: {
+      title: { type: "string" },
+      description: { type: "string" },
+    },
+    required: ["title", "description"], // Both title and description are required
+    additionalProperties: false // No additional properties are allowed
+  };
+  
+const validate = ajv.compile(ideaSchema); 
+
+function validateIdeas(ideas:any) {
+    if(!Array.isArray(ideas)){
+        return false; 
+    }
+    for(const idea of ideas){
+        const valid = validate(idea); 
+        if(!valid){
+            return false; 
+        }
+    }
+    return true; 
+}
 
 
 
@@ -18,7 +46,12 @@ export async function POST(request: Request){
 
     try {
         //const data = await main01(content); 
-        const data = await upgradeMain(content); 
+        let valid = false; 
+        let data : any ; 
+        while(!valid){
+            data = await upgradeMain(content); 
+            valid = validateIdeas(JSON.parse(data.choices[0].message.content)); 
+        }
         return NextResponse.json(data); 
     }catch(error){
         console.error(error); 

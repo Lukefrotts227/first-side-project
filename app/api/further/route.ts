@@ -1,5 +1,9 @@
 import { howTo } from "@/helpers/openai/openmain";
 import { NextResponse } from 'next/server'; 
+import Ajv from "ajv";
+
+
+
 
 export async function POST(request: Request){
     const body = await request.json(); 

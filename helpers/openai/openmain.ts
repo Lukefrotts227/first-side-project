@@ -2,6 +2,10 @@ import openai from "./config/openaiConfig";
 
 const para = `It must be a single sentence and short.`
 
+ const checker = (completeion: any) => {
+    return; 
+ }
+
 
 export const questioner = async(content: string) =>{
     const completion = await openai.chat.completions.create({
@@ -29,7 +33,7 @@ export const upgradeMain = async(content: string) =>{
         messages:[{role:"system", content: "This chatbot returns json formatted app ideas"}, {role:"user", content:`${content}`}],
         model:'ft:gpt-3.5-turbo-0613:personal::8Fq5PV1M',
         max_tokens:600, 
-        temperature: .6, 
+        temperature: 1.6, 
 
     })
     return completion; 
@@ -40,7 +44,7 @@ export const howTo = async(content: string) => {
         messages:[{role:"system", content:"This chatbot takes app ideas and outputs the process of building it in proper json format"}, {role:"user", content:`${content}`}], 
         model:'ft:gpt-3.5-turbo-0613:personal::8Fx3JJyg',
         max_tokens:800, 
-        temperature: .8,
+        temperature: .3,
     })
     return completition; 
 }
@@ -50,7 +54,7 @@ export const stackGen = async(content: string) =>{
         messages:[{role: "system", content: "This chatbot returns a tech stack sorted into categories base on an app idea in proper JSON format"}, {role: "user", content: `${content}`}], 
         model: 'ft:gpt-3.5-turbo-0613:personal::8GEJLT5r',
         max_tokens:1200, 
-        temperature: .9, 
+        temperature: .4, 
     })
     return completion; 
 }
