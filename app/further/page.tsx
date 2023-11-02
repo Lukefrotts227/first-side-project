@@ -1,11 +1,12 @@
 "use client"; 
 import { Display } from "@/components/further/display";
 import { GenerateMap } from "@/components/further/generatemap";
+import { Navbar } from "@/components/universal/navbar";
 import { useState, useEffect } from 'react'; 
 
 export default function Further(){
     const [canSee, setCanSee]: any = useState(true); 
-    
+
     useEffect(() => {
         let can = sessionStorage.getItem('savedIdeas'); 
         if(can){
@@ -25,6 +26,7 @@ export default function Further(){
     return(
         <main>
             <header className="h-28">
+                <Navbar type={1} />
             </header>
 
             <section className='pb-16'>
