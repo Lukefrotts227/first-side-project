@@ -8,7 +8,7 @@ export const main01 = async (content: string) =>{
         model: "gpt-3.5-turbo",
         max_tokens: 600,
 
-        temperature: .1,
+        temperature: .8,
     });
     return completion; 
 }; 
@@ -18,7 +18,7 @@ export const upgradeMain = async(content: string) =>{
         messages:[{role:"system", content: "This chatbot returns json formatted app ideas"}, {role:"user", content:`${content}`}],
         model:'ft:gpt-3.5-turbo-0613:personal::8Fq5PV1M',
         max_tokens:600, 
-        temperature: .1, 
+        temperature: .6, 
 
     })
     return completion; 
@@ -29,7 +29,7 @@ export const howTo = async(content: string) => {
         messages:[{role:"system", content:"This chatbot takes app ideas and outputs the process of building it in proper json format"}, {role:"user", content:`${content}`}], 
         model:'ft:gpt-3.5-turbo-0613:personal::8Fx3JJyg',
         max_tokens:800, 
-        temperature: .3,
+        temperature: .8,
     })
     return completition; 
 }
@@ -39,7 +39,7 @@ export const stackGen = async(content: string) =>{
         messages:[{role: "system", content: "This chatbot returns a tech stack sorted into categories base on an app idea in proper JSON format"}, {role: "user", content: `${content}`}], 
         model: 'ft:gpt-3.5-turbo-0613:personal::8GEJLT5r',
         max_tokens:1200, 
-        temperature: .3, 
+        temperature: .9, 
     })
     return completion; 
 }
