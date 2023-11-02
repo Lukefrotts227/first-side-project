@@ -1,7 +1,8 @@
 import React, { useState } from 'react'; 
 import { useRouter } from 'next/navigation'
 
-
+// Storage { savedIdeas: '{"title":"Virtual Race Competitor","description":"Join virtual races and compete with runners from around the world."}', length: 1 }
+// Storage { savedIdeas: '[{"title":"Walking helper","description":"A project to track walking habits"}]', length: 1 }
 export const Custom = ()=>{
     const [title, setTitle]: any = useState(''); 
     const [description, setDescription]: any = useState(''); 
@@ -22,8 +23,11 @@ export const Custom = ()=>{
             return; 
         }
         sessionStorage.clear(); 
-        const buildIdea: any = `{"title":"${title}", "description":"${description}"}`; 
-        sessionStorage.setItem('savedIdeas', JSON.stringify(buildIdea)); 
+        const buildIdea: any = { title, description }; 
+
+        const savedIdeaString = JSON.stringify(buildIdea); 
+
+        sessionStorage.setItem('savedIdeas', savedIdeaString); 
         router.push('/further'); 
         return; 
     }

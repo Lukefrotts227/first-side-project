@@ -34,6 +34,15 @@ export const howTo = async(content: string) => {
     return completition; 
 }
 
+export const stackGen = async(content: string) =>{
+    const completion = await openai.chat.completions.create({
+        messages:[{role: "system", content: "This chatbot returns a tech stack sorted into categories base on an app idea in proper JSON format"}, {role: "user", content: `${content}`}], 
+        model: 'ft:gpt-3.5-turbo-0613:personal::8GEJLT5r',
+        max_tokens:1200, 
+        temperature: .3, 
+    })
+    return completion; 
+}
 
 
 if(require.main === module){

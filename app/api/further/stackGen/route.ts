@@ -1,4 +1,4 @@
-import { howTo } from "@/helpers/openai/openmain";
+import { stackGen } from "@/helpers/openai/openmain";
 import { NextResponse } from 'next/server'; 
 
 export async function POST(request: Request){
@@ -10,7 +10,7 @@ export async function POST(request: Request){
         return NextResponse.json({ error: 'Internal Server Error'}, { status: 500}); 
     }
     try{
-        const data = await howTo(content); 
+        const data = await stackGen(content); 
         return NextResponse.json(data); 
     }catch(error){
         console.error(error); 
