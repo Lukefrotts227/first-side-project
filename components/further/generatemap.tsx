@@ -37,10 +37,26 @@ export const GenerateMap = () =>{
     const [isLoading, setIsLoading]: any = useState(false); 
     const [isStack, setIsStack]: any = useState(false); 
     const [data, setData]: any = useState(null); 
+
+    const [selectedStack, setSelectedStack] = useState<Technology[]>([]); 
+    const [selectedMap, setSelectedMap] = useState<any[]>([]); 
    
 
     const controller = new AbortController();
     const timeoutId = setTimeout(() => controller.abort(), 10000);
+
+    const storeMap = (map: any[]) =>{
+        setSelectedMap(map); 
+
+        sessionStorage.setItem('selectedMap', JSON.stringify(map)); 
+        alert("success"); 
+    }
+
+    const storeStack = (tech : Technology[]) =>{
+        setSelectedStack(tech); 
+        sessionStorage.setItem('selectedStack', JSON.stringify(tech))
+        alert("success")
+    }
 
     const stackGen = async() =>{
         try {
@@ -105,7 +121,6 @@ export const GenerateMap = () =>{
     }
 
 
-
     
 
     return(
@@ -122,15 +137,22 @@ export const GenerateMap = () =>{
             {data ? (
 
                 isStack ? (
-                    <div className="flex flex-row gap-5 pb-3 px-9">
-                       {Object.entries(data).map(([sectionTitle, technologies], index) => (
-                        <TechnologySection key={index} title={sectionTitle} technologies={technologies as Technology[]} />
-                       ))}
+                    <div className ="flex flex-col items-center justify-center">
+                        <button className="p-2 mb-4 bg-slate-950 text-zinc-50 shadow-2xl rounded-2xl border-white hover:bg-zinc-50 hover:text-slate-950 hover:font-bold"
+                        onClick={() => storeStack(data)}>Store this Stack</button>
+                        <div className="flex flex-row gap-5 pb-3 px-9">
+                        {Object.entries(data).map(([sectionTitle, technologies], index) => (
+                            <TechnologySection key={index} title={sectionTitle} technologies={technologies as Technology[]} />
+                        ))}
+                        
+                        </div>
                     </div>
                 ) 
                 : 
                 (
-                <div>
+                <div className ="flex flex-col items-center justify-center">
+                    <button className="p-2 mb-4 bg-slate-950 text-zinc-50 shadow-2xl rounded-2xl border-white hover:bg-zinc-50 hover:text-slate-950 hover:font-bold"
+                    onClick={() => storeMap(data.process)}>Store this Roadmap</button>
                     <ul className = " flex flex-col text-center items-center justify-center">
                         {data.process.map((step:any, index:any) => (
                             <div className ="w-2/5 m-4" key={index}>
@@ -138,7 +160,7 @@ export const GenerateMap = () =>{
                                     <BiSolidDownArrowAlt size={55} />
                                 </div>
                                 <div className="bg-zinc-300 p-2">
-                                    <h3 className='p-6'>{step.process_step}</h3>
+                                    <h3 className='p-6'>{step.step}</h3>
                                     <p>{step.details}</p>
                                 </div>
                             </div>
